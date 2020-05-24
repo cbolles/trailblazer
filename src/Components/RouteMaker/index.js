@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css'
+import Map from '../Map';
 
 
 class RouteMaker extends React.Component {
@@ -40,6 +41,7 @@ class RouteMaker extends React.Component {
                         <option values="50">50 miles</option>
                     </select>
                 </div>
+                <Map/> 
             </div>
         );
     }
