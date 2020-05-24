@@ -1,10 +1,11 @@
 import React from 'react';
 import './style.css'
 import Map from '../Map';
-
+import { withScriptjs } from "react-google-maps";
 
 class RouteMaker extends React.Component {
     render() {
+        const MapLoader = withScriptjs(Map);
         return (
             <div className="RouteMaker">
                 <center>
@@ -41,7 +42,10 @@ class RouteMaker extends React.Component {
                         <option values="50">50 miles</option>
                     </select>
                 </div>
-                <Map/> 
+                <MapLoader
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI3-W09dhJV0tMfAFGpcEembgeKKWBd2Y"
+                    loadingElement={<div style={{ height: `100%` }} />}
+                /> 
             </div>
         );
     }
