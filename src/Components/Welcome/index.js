@@ -13,10 +13,9 @@ class Welcome extends React.Component {
                     and we will supplement you with the best route and possible stops on the way!</p>
                     <br></br>
                     <fieldset style={{width: 500}}>
-                        <legend style={{fontSize: 30}}> You can either log in or proceed as a guest</legend>
+                        <legend style={{fontSize: 30}}>Click to Create a Route</legend>
                         <div>
-                            <a href="/LogIn"><button>Log In</button></a>
-                            <a href="/Guest"><button>Guest User</button></a>
+                            <button onClick={() => this.props.nextState(APP_STATES.ROUTE)}>Create Route</button>
                         </div>
                     </fieldset>
                 </center>

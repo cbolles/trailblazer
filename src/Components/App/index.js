@@ -17,6 +17,7 @@ class App extends React.Component {
     }
 
     updateState(nextState) {
+        console.log(nextState);
         this.setState({nextState});
     }
 
