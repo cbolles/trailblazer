@@ -22,15 +22,15 @@ class RouteMaker extends React.Component {
                         <legend>Features: </legend>
                             <div>
                                 <label htmlFor="hike">Hike</label>
-                                <input type="radio" name="hike" value="hike"/> <br/>
+                                <input type="checkbox" name="hike" value="hike"/> <br/>
                                 <label htmlFor="camp">Camp</label>
-                                    <input type="radio" name="camp" value="camp"/><br/>
+                                    <input type="checkbox" name="camp" value="camp"/><br/>
                                 <label htmlFor="swim">Swim</label>
-                                <input type="radio" name="swim" value="swim"/><br/>
+                                <input type="checkbox" name="swim" value="swim"/><br/>
                                 <label htmlFor="fishing">Fishing</label>  
-                                <input type="radio" name="fishing" value="fish"/><br/>
+                                <input type="checkbox" name="fishing" value="fish"/><br/>
                                 <label htmlFor="star">Stargazing</label>
-                                <input type="radio" name="star" value="star"/><br/>
+                                <input type="checkbox" name="star" value="star"/><br/>
                         </div>
                     </fieldset>
                     <label htmlFor="miles">Maximum distance from route: </label>
