@@ -4,6 +4,39 @@ import Map from '../Map';
 import { withScriptjs } from "react-google-maps";
 
 class RouteMaker extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            origin: null,
+            destination: null
+        }
+        this.handleDirectionChange = this.handleDirectionChange.bind(this);
+    }
+
+    handleDirectionChange(event) {
+        if(event.target != null) {
+            let userInput = encodeURI(event.target.value);
+            let inputName = event.target.name;
+            const url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+                userInput + '&key=AIzaSyDI3-W09dhJV0tMfAFGpcEembgeKKWBd2Y';
+
+            // Update geocode for origin or destination
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    const lat = data.results[0].geometry.location.lat;
+                    const lng = data.results[0].geometry.location.lng;
+                    if(inputName === 'origin')
+                        this.setState({origin: {lat: lat, lng: lng}});
+                    else
+                        this.setState({destination: {lat: lat, lng: lng}});
+
+                });
+        }
+    }
+
     render() {
         const MapLoader = withScriptjs(Map);
         return (
@@ -13,24 +46,24 @@ class RouteMaker extends React.Component {
                 </center>
                 <br/>
                 <br/>
-                <div>
-                    <label htmlFor="from">Start Location:</label>
-                    <input type="text" id="from" name="from"/>
-                    <label htmlFor="to">Final Destination:</label>
-                    <input type="text" id="to" name="to"/>
+                <form>
+                    <label htmlFor="origin">Start Location:</label>
+                    <input type="text" id="origin" name="origin" onBlur={this.handleDirectionChange}/>
+                    <label htmlFor="destination">Final Destination:</label>
+                    <input type="text" id="destination" name="destination" onBlur={this.handleDirectionChange}/>
                     <fieldset id="feat">
                         <legend>Features: </legend>
-                            <div>
-                                <label htmlFor="hike">Hike</label>
-                                <input type="checkbox" name="hike" value="hike"/> <br/>
-                                <label htmlFor="camp">Camp</label>
-                                    <input type="checkbox" name="camp" value="camp"/><br/>
-                                <label htmlFor="swim">Swim</label>
-                                <input type="checkbox" name="swim" value="swim"/><br/>
-                                <label htmlFor="fishing">Fishing</label>  
-                                <input type="checkbox" name="fishing" value="fish"/><br/>
-                                <label htmlFor="star">Stargazing</label>
-                                <input type="checkbox" name="star" value="star"/><br/>
+                        <div>
+                            <label htmlFor="hike">Hike</label>
+                            <input type="checkbox" name="hike" value="hike"/> <br/>
+                            <label htmlFor="camp">Camp</label>
+                            <input type="checkbox" name="camp" value="camp"/><br/>
+                            <label htmlFor="swim">Swim</label>
+                            <input type="checkbox" name="swim" value="swim"/><br/>
+                            <label htmlFor="fishing">Fishing</label>  
+                            <input type="checkbox" name="fishing" value="fish"/><br/>
+                            <label htmlFor="star">Stargazing</label>
+                            <input type="checkbox" name="star" value="star"/><br/>
                         </div>
                     </fieldset>
                     <label htmlFor="miles">Maximum distance from route: </label>
@@ -41,7 +74,7 @@ class RouteMaker extends React.Component {
                         <option values="25">25 miles</option>
                         <option values="50">50 miles</option>
                     </select>
-                </div>
+                </form>
                 <MapLoader
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI3-W09dhJV0tMfAFGpcEembgeKKWBd2Y"
                     loadingElement={<div style={{ height: `100%` }} />}
